@@ -1,0 +1,10 @@
+const fs=require('node:fs'),vm=require('node:vm'),assert=require('node:assert/strict');
+const html=fs.readFileSync('index.html','utf8'),source=fs.readFileSync('cards.js','utf8');
+const ctx={window:{}};vm.runInNewContext(source,ctx);const cards=ctx.window.JANKEN_CARD_PROPOSALS;
+assert.equal(cards.length,50);assert.equal(new Set(cards.map(c=>c.id)).size,50);assert.ok(cards.every(c=>c.status==='draft'&&c.description&&c.category));
+const nodes={cardSearch:{value:''},cardList:{children:[],replaceChildren(){this.children=[]},append(x){this.children.push(x)}},cardCount:{}};
+Object.assign(ctx,{$:id=>nodes[id],document:{createElement:()=>({append(...x){this.children=x}})}});
+vm.runInNewContext(html.match(/function renderCards\(\).*?(?=\$\('openCards'\))/s)[0],ctx);
+ctx.renderCards();assert.equal(nodes.cardList.children.length,50);nodes.cardSearch.value='敗北否定';ctx.renderCards();assert.equal(nodes.cardList.children.length,1);assert.equal(nodes.cardList.children[0].children[2].textContent,'自分の負けを一度だけあいこにする');nodes.cardSearch.value='存在しない名前';ctx.renderCards();assert.equal(nodes.cardList.children.length,0);
+for(const match of html.matchAll(/<script>([\s\S]*?)<\/script>/g))new vm.Script(match[1]);
+console.log('PASS: 50 unique draft cards, descriptions, search, empty results, inline JavaScript syntax');
