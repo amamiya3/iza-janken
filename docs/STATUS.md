@@ -33,3 +33,11 @@ main d40655b。死神ホーム・透過画像は既に追加済み。assets/reap
 - git diff --check: 成功。
 - tests/smoke.cjs: Playwright用。今回の環境はChromium起動時socket権限エラーで実行不可。画面・ソロ・保存のテスト成功とは扱わない。PlaywrightとChromium導入後 node tests/smoke.cjs で再実行。CHROMIUM_PATHで実行ファイル指定可。
 - 実オンライン2端末、音声、iOS Safari、カード実戦は未検証。
+
+## 最新追記：ホームの完成素材組み込み（2026-11-18）
+- 正式タイトル・画風と素材の仕様は docs/ART_STYLE.md と docs/VISUAL_DESIGN.md を参照。
+- 礼拝堂と死神背景、葬手タイトル、DEAD OR ALIVEロゴ、石板ALIVE/DEADをassets/homeのWebPに分離して公開HTMLへ組み込んだ。
+- 右上は戦績/カード一覧、対戦ボタンは英字だけ表示。通常/秘技の区別はアクセシブル名に保持。DEADはまだ制作中。
+- 公開Chromeで背景/タイトル/石板メニュー表示、ALIVEのパネル開閉→ソロ画面→退出、カード図鑑50件、戦績ページを確認。今回の操作で試合を確定せず、戦績値は変更していない。
+- JSは変更前と一致。構文・カード図鑑検索・操作ID重複の検証成功。実機iPhoneの見た目とオンライン2端末は未検証。
+- ホーム以外の新美術デザインは未組み込み。天秤の試作が存在することは現在の採用を意味しない。最新の対戦画面方針を確認すること。
