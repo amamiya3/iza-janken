@@ -51,7 +51,7 @@ function carvedCollapse(ctx,home,w,h,t,chunks,plate){const sw=Math.min(w,h*.7),s
  if(t<.72)return;
  for(const c of chunks){const fall=Math.max(0,t-c.delay);if(t<c.delay-.12)continue;const appear=clamp((t-(c.delay-.12))/.12),scale=1+fall*.1;ctx.save();ctx.globalAlpha=appear;ctx.translate(c.x+c.vx*fall,c.y+35*fall+500*fall*fall);ctx.rotate(c.spin*fall);ctx.scale(scale,scale);if(art.rubble.complete&&art.rubble.naturalWidth){const [x,y,cw,ch]=rubbleRects[c.sprite];ctx.drawImage(art.rubble,x,y,cw,ch,-c.width/2,-c.height/2,c.width,c.height)}else{ctx.fillStyle='#3e4438';ctx.fillRect(-c.width/2,-c.height/2,c.width,c.height);ctx.fillStyle='#6d7462';ctx.fillRect(-c.width/2,c.height*.35,c.width,c.height*.15)}ctx.restore()}
  // Small, soft dust puffs soften the join without hiding the heavy cross-sections.
- if(t>1.1&&t<2.8){ctx.save();ctx.globalAlpha=Math.sin(clamp((t-1.1)/1.7)*Math.PI)*.12;ctx.fillStyle='#a6ac98';for(let i=0;i<7;i++){ctx.beginPath();ctx.ellipse(sx+sw*(i/6),h*(.56+(t-1.1)*.15),sw*.17,h*.035,0,0,Math.PI*2);ctx.fill()}ctx.restore()}
+ if(t>1.1&&t<2.8){ctx.save();ctx.globalAlpha=Math.sin(clamp((t-1.1)/1.7)*Math.PI)*.25;ctx.fillStyle='#a6ac98';for(let i=0;i<32;i++){const x=sx+((i*53.7)%sw),y=(i*97.3+t*45)%h;ctx.fillRect(x,y,1+(i%3),1+(i%2))}ctx.restore()}
 }
 
 function start(mode,done,audioContext){if(active)return false;const app=document.querySelector('.app'),origin=document.activeElement,scrollY=window.scrollY,overlay=document.createElement('div');overlay.className='modeTransition';overlay.setAttribute('role','dialog');overlay.setAttribute('aria-modal','true');overlay.setAttribute('aria-label',mode==='alive'?'闇へ吸い込まれています':'石板が崩れ、地下へ降りています');
