@@ -1,0 +1,18 @@
+# Public GitHub Pages serves only a closed-site notice.
+# Owner-only game is hosted separately. Do not remove these exclusions.
+exclude:
+  - _private
+  - assets
+  - prototypes
+  - dead.html
+  - dead-engine.js
+  - dead-ui.js
+  - cards.js
+  - transitions.js
+  - docs
+  - tests
+  - README.md
+  - HOME_HANDOFF.md
+  - rock.png
+  - scissors.png
+  - paper.png
